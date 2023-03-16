@@ -1,8 +1,8 @@
-import cv2
 import math
+
+import cv2
 import mediapipe as mp
 
-# Taking the path of the video
 video = cv2.VideoCapture(r'Videos/polichinelos.mp4')
 pose = mp.solutions.pose
 Pose = pose.Pose(min_tracking_confidence=0.5, min_detection_confidence=0.5)
@@ -43,7 +43,8 @@ while True:
 
         text = (f'Quantidade: {count}')
         cv2.rectangle(img, (20, 240), (280, 280), (255, 0, 0), -1)
-        cv2.putText(img, text, (40, 265), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+        cv2.putText(img, text, (40, 265), cv2.FONT_HERSHEY_SIMPLEX,
+                    1, (255, 255, 255), 2)
 
     cv2.imshow('videoRGB', img)
     cv2.waitKey(40)
