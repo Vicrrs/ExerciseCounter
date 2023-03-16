@@ -14,6 +14,10 @@ while True:
 
     results = Pose.process(videoRGB)
     points = results.pose_landmarks
+    draw.draw_landmarks(img, points, pose.POSE_CONNECTIONS)
 
     cv2.imshow('videoRGB', img)
     cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break   
