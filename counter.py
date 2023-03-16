@@ -15,6 +15,17 @@ while True:
     results = Pose.process(videoRGB)
     points = results.pose_landmarks
     draw.draw_landmarks(img, points, pose.POSE_CONNECTIONS)
+    h, w, _ = img.shape
+
+    if points:
+        peDY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
+        peDX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
+        peEY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
+        peEX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
+        moDY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
+        moDX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
+        moEY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
+        moEX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
 
     cv2.imshow('videoRGB', img)
     cv2.waitKey(40)
