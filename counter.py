@@ -4,6 +4,8 @@ import mediapipe as mp
 
 # Taking the path of the video
 video = cv2.VideoCapture()
+pose = mp.solutions.pose
+Pose = pose.Pose()
 
 while True:
     success, img = video.read()
