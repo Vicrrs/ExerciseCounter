@@ -1,4 +1,5 @@
 import cv2
+import math
 import mediapipe as mp
 
 
@@ -18,14 +19,17 @@ while True:
     h, w, _ = img.shape
 
     if points:
-        peDY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
-        peDX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
-        peEY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
-        peEX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
-        moDY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
-        moDX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
-        moEY = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].y*h)
-        moEX = int(points.landmarks[pose.PoseLandmarks.RIGHT_FOOT_INDEX].x*w)
+        peDY = int(points.landmark[pose.PoseLandmark.RIGHT_FOOT_INDEX].y*h)
+        peDX = int(points.landmark[pose.PoseLandmark.RIGHT_FOOT_INDEX].x*w)
+        peEY = int(points.landmark[pose.PoseLandmark.LEFT_FOOT_INDEX].y*h)
+        peEX = int(points.landmark[pose.PoseLandmark.LEFT_FOOT_INDEX].x*w)
+        moDY = int(points.landmark[pose.PoseLandmark.RIGHT_INDEX].y*h)
+        moDX = int(points.landmark[pose.PoseLandmark.RIGHT_INDEX].x*w)
+        moEY = int(points.landmark[pose.PoseLandmark.LEFT_INDEX].y*h)
+        moEX = int(points.landmark[pose.PoseLandmark.LEFT_INDEX].x*w)
 
+        distMO = math.hypot(moDX-moEX, moDY-moEY)
+        distPE = math.hypot(peDX-peEX, peDY-peEY)
+        print(f'MAOS: {distMO}. PES: {distPE}')
     cv2.imshow('videoRGB', img)
     cv2.waitKey(40)
